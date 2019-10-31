@@ -12,7 +12,6 @@ public class Messwerte_auswerten {
             anz = askMesswert(in);
         }
         for (int i = 0; i < anz.length; i++) {
-
             wert = askWert(in);
 
             while (wert < -16 || wert > 27){
@@ -34,7 +33,7 @@ public class Messwerte_auswerten {
     }
 
     private static float[] askMesswert(Scanner in) {
-        System.out.println("Wieviele Messwerte wollen Sie eingeben?");
+        System.out.println("Wieviele Messwerte wollen Sie eingebens?");
         return new float[(int) in.nextFloat()];
     }
 }
