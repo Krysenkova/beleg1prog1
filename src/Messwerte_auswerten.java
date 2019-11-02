@@ -27,7 +27,8 @@ public class Messwerte_auswerten {
             if (anz[i] > groesste)
                 groesste = anz[i];
             else if (anz[i] < kleinste)
-                kleinste = anz[i]; }
+                kleinste = anz[i];
+        }
 
         System.out.println("Ihre Werte:");
         int n = 1;
@@ -39,8 +40,8 @@ public class Messwerte_auswerten {
         System.out.println("Der größte Messwert ist: " + groesste);
         System.out.println("Der kleinste Messwert ist : " + kleinste);
 
-        //System.out.println("Der Position von " + groesste + " ist " + (float)[anz, groesste));
-       // System.out.println("Der Position von " + kleinste + " ist " + (float[anz, kleinste));
+        System.out.println("Der Position von " + groesste + " ist " + position(anz, groesste));
+        System.out.println("Der Position von " + kleinste + " ist " + position(anz, kleinste));
     }
 
     private static float askWert(Scanner in) {
@@ -48,11 +49,21 @@ public class Messwerte_auswerten {
         return in.nextFloat();
     }
 
+
     private static float[] askMesswert(Scanner in) {
         System.out.println("Wieviele Messwerte wollen Sie eingeben?");
         return new float[(int) in.nextFloat()];
     }
-
+    private static int position (float[] anz, float t){
+        if (anz == null) return -1;
+        int length = anz.length;
+        int i = 0;
+        while (i < length) {
+            if (anz[i] == t) return i;
+            else i = i + 1;
+        }
+        return -1;
+    }
 
      }
 
