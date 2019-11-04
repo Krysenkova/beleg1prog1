@@ -28,10 +28,17 @@ public class Messwerte_auswerten {
             sum = sum + anz[i];
             mittelwert = sum / anz.length;
             }
+
         quadAbw = (float) 0.0;
         for (int i = 0; i < anz.length; i++) {
             quadAbw = (float) (((anz[i] - mittelwert) * (anz[i] - mittelwert)) / (anz.length - 1.0));
         }
+
+        int neg = 0;
+        for(int i = 0; i < anz.length; i++) {
+            if (anz[i] < 0) neg++;
+        }
+
         float kleinste = anz[0];
         float groesste = anz[0];
         for (int i = 1; i < anz.length; i++) {
@@ -41,6 +48,7 @@ public class Messwerte_auswerten {
                 kleinste = anz[i];
         }
 
+        System.out.println(" ");
         System.out.println("Ihre Werte:");
         int n = 1;
         for (float i : anz) {
@@ -48,14 +56,20 @@ public class Messwerte_auswerten {
         }
         System.out.println(" ");
 
+        System.out.println(" ");
         System.out.println("Der größte Messwert ist " + groesste);
         System.out.println("Der kleinste Messwert ist " + kleinste);
 
+        System.out.println(" ");
         System.out.println("Der Position von " + groesste + " ist " + position(anz, groesste));
         System.out.println("Der Position von " + kleinste + " ist " + position(anz, kleinste));
 
+        System.out.println(" ");
         System.out.println("Die Mittelwert ist: " + mittelwert);
         System.out.println("Die  Streuung ist:" + quadAbw);
+
+        System.out.println(" ");
+        System.out.println("Die Anzahl der negativen Messwete ist " + neg);
     }
 
     private static float askWert(Scanner in) {
