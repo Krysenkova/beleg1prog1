@@ -23,10 +23,15 @@ public class Messwerte_auswerten {
         }
         float mittelwert = (float) 0.0;
         float sum = (float) 0.0;
+        float quadAbw = 0;
         for (int i = 0; i < anz.length; i++) {
             sum = sum + anz[i];
-            mittelwert = sum / anz.length;}
-
+            mittelwert = sum / anz.length;
+            }
+        quadAbw = (float) 0.0;
+        for (int i = 0; i < anz.length; i++) {
+            quadAbw = (float) (((anz[i] - mittelwert) * (anz[i] - mittelwert)) / (anz.length - 1.0));
+        }
         float kleinste = anz[0];
         float groesste = anz[0];
         for (int i = 1; i < anz.length; i++) {
@@ -50,6 +55,7 @@ public class Messwerte_auswerten {
         System.out.println("Der Position von " + kleinste + " ist " + position(anz, kleinste));
 
         System.out.println("Die Mittelwert ist: " + mittelwert);
+        System.out.println("Die  Streuung ist:" + quadAbw);
     }
 
     private static float askWert(Scanner in) {
