@@ -5,18 +5,19 @@ public class Messwerte_auswerten {
 
     public static void main(String[] args) {
 
-        String weiterend;
-        do {
+        System.out.println("Messwerte auswerten Programm");
 
-            System.out.println("Messwerte auswerten Programm");
+        String weiterend;
+
+        do {   //do-while starts the program from the beginning when the user asks do to so
 
             Scanner in = new Scanner(System.in);
             double[] anz;
             double wert;
 
-            anz = askMesswert(in);
+            anz = askMesswert(in); //calls the method to scan user's numbers to fill an array
 
-            while (anz.length < 5 || anz.length > 40) {
+            while (anz.length < 5 || anz.length > 40) { //checks if the number of values is correct
                 System.out.println("Geben Sie bitte eine Zahl aus dem Bereich 5 bis 40 ein");
                 anz = askMesswert(in);
             }
@@ -27,21 +28,21 @@ public class Messwerte_auswerten {
                 for (int i = 0; i < anz.length; i++) {
                     double max = 27.0;
                     double min = -16.0;
-                    double range = max - min + 1;
+                    double range = max - min;
                     double zufall = (Math.random() * range) + min;
-                    anz[i] = zufall;
+                    anz[i] = zufall; //fills an array with random numbers from -16 till 27 when the answer is j
                 }
 
-            } else
+            } else // executes when the user wants to give values him/herself
 
                 for (int i = 0; i < anz.length; i++) {
-                    wert = askWert(in);
+                    wert = askWert(in); // calls the method to scan values that the user prints in
 
-                    while (wert < -16 || wert > 27) {
+                    while (wert < -16 || wert > 27) { //checks if the values are in correct range
                         System.out.println("Geben Sie bitte ein Messwert aus dem Bereich -16.0 bis 27.0 ein");
                         wert = askWert(in);
                     }
-                    anz[i] = wert;
+                    anz[i] = wert; //creates an array with values
                 }
             double mittelwert = 0.0;
             double sum = 0.0;
@@ -53,7 +54,7 @@ public class Messwerte_auswerten {
             double quadAbw = 0.0;
             double streuung = 0.0;
             for (double v : anz) {
-                quadAbw = (((v - mittelwert) * (v - mittelwert)) / (anz.length - 1.0) + quadAbw);
+                quadAbw = ((((v - mittelwert) * (v - mittelwert)) / (anz.length - 1.0)) + quadAbw);
                 streuung = Math.sqrt(quadAbw);
             }
 
@@ -75,23 +76,27 @@ public class Messwerte_auswerten {
             System.out.println("Ihre Werte:");
             int n = 1;
             for (double i : anz) {
-                System.out.print("Wert" + " " + (n++) + " " + "=" + " " + i + "| ");
-                if (n % 9 == 0)
+                System.out.printf("Wert %2d ist %5.1f | ", n++, i);
+                if (n % 8 == 1)
                     System.out.println();
             }
             System.out.println(" ");
 
             System.out.println(" ");
-            System.out.println("Der größte Messwert ist " + groesste);
-            System.out.println("Der kleinste Messwert ist " + kleinste);
+            System.out.printf("Der größte Messwert ist %.1f%n", groesste);
+            System.out.printf("Der kleinste Messwert ist %.1f%n", kleinste);
+
+            int minposition = position(anz, kleinste) + 1;
+            int maxposition = position(anz, groesste) + 1;
+            System.out.println(" ");
+            System.out.printf("Der Position von %.1f",groesste);
+            System.out.println(" ist " + maxposition);
+            System.out.printf("Der Position von %.1f", kleinste);
+            System.out.println(" ist " + minposition);
 
             System.out.println(" ");
-            System.out.println("Der Position von " + groesste + " ist " + position(anz, groesste));
-            System.out.println("Der Position von " + kleinste + " ist " + position(anz, kleinste));
-
-            System.out.println(" ");
-            System.out.println("Die Mittelwert ist: " + mittelwert);
-            System.out.println("Die  Streuung ist:" + streuung);
+            System.out.printf("Die Mittelwert ist %.1f%n", mittelwert);
+            System.out.printf("Die Streuung ist %.6f%n", streuung);
 
             System.out.println(" ");
             System.out.println("Die Anzahl der negativen Messwete ist " + neg);
@@ -100,7 +105,7 @@ public class Messwerte_auswerten {
             System.out.println("Wollen Sie mit anderen Messwerten fortfahren? (j/n)");
             weiterend = in.next();
 
-        } while (weiterend.equals("j"));
+        } while (weiterend.equals("j")); //when the answer is j, refers to the do section and starts the program again
     }
 
     private static double askWert(Scanner in) {
@@ -109,8 +114,12 @@ public class Messwerte_auswerten {
     }
 
 
+    /**
+     * @param in Scanner for getting values from the user
+     * @return array which...
+     */
     private static double[] askMesswert(Scanner in) {
-        System.out.println("Wieviele Messwerte wollen Sie eingeben?");
+        System.out.println("Wie viele Messwerte wollen Sie eingeben?");
         return new double[(int) in.nextFloat()];
     }
 
